@@ -17,9 +17,10 @@ def player(song):
     wave_obj = sa.WaveObject.from_wave_file(
         f"./songs/{song}")
     play_obj = wave_obj.play()
+    print(f'Currently Playing: {song}')
     while True:
         if(play_obj.is_playing()):
-            print('')
+            pass
         else:
             print('Ended')
             break
@@ -32,23 +33,32 @@ def greetings():
     print('*' * 35)
 
 
+def get_list_of_songs():
+    song_list = dict()
+    for key, value in enumerate(os.listdir('./songs')):
+        song_list[key+1] = value
+    return song_list
+
+
 def main(choice):
     list_of_songs = os.listdir(
         "./songs")
+    song_list = get_list_of_songs()
+
     if option == 1:
-        for i in list_of_songs:
-            print(i)
-        song = input('Enter song to play:')
-        if song in list_of_songs:
-            player(song)
+        for id_, song in song_list.items():
+            print(f"{id_}. {song}")
+        song = int(input('Enter a song id to play: '))
+        if bool(song_list.get(song, 0)):
+            player(song_list[song])
         else:
-            print('Song not found!(Please type in the full name and the extension!!)')
+            print("Song with the given id was not found.")
     elif option == 2:
         song = random.choice(list_of_songs)
         player(song)
     elif option == 3:
-        for i in list_of_songs:
-            print(i)
+        for id_, song in song_list.items():
+            print(f"{id_}. {song}")
     elif option == 0:
         exit()
     else:
