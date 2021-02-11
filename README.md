@@ -9,7 +9,12 @@ A Python program:book: that plays songs contained in a file.(Might not work with
 ## Installation
 
 ```bash
-pip/pip3 install -r requirements.txt
+method I:
+  pip/pip3 install -r requirements.txt
+method II:(If method I doesnt work)
+  sudo apt-get install python3-dev
+  sudo apt-get install libasound2-dev
+  pip install simpleaudio
 ```
 ## Usage
 
